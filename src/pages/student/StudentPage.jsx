@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import { fetchStudentEventInstances } from "../../services/studentProjects/studentApi.js";
 import Button from "../../components/ui/Button.jsx";
 import EventInstanceCard from "../../components/ui/EventInstanceCard.jsx";

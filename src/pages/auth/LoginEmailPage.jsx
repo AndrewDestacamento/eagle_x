@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import Button from "../../components/ui/Button.jsx";
 import { getAuthIntent } from "../../services/loginAuth/authIntent.js";
 import { fetchPersonByEmail, fetchPersonRoles } from "../../services/loginAuth/authApi.js";

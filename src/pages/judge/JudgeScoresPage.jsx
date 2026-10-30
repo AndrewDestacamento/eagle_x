@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { Card, CardBody, CardTitle } from "../../components/ui/Card.jsx";
 import { fetchScoreSheetsByJudge } from "../../services/score/scoreApi.js";
 import { getCurrentUser } from "../../services/loginAuth/authService.js";

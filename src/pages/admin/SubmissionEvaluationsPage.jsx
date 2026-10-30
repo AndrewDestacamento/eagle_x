@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import Button from "../../components/ui/Button.jsx";
 import CriterionInfoTooltip from "../../components/ui/CriterionInfoTooltip.jsx";
 import { fetchSubmissionEvaluations } from "../../services/evaluations/evaluationsService.js";

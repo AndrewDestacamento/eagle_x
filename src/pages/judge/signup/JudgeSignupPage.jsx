@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import { fetchEventInstanceDetails } from "../../../services/eventAdminService.js";
 import { fetchJudgeSignupConfig, signUpJudgeForEvent } from "../../../services/judgeSignup/judgeSignupService.js";
 import { saveJudgeSession } from "../../../services/judgeSession.js";

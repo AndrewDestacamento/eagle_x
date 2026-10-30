@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import Button from "../../components/ui/Button.jsx";
 import EventInstanceCard from "../../components/ui/EventInstanceCard.jsx";
 import { fetchJudgeEventInstances } from "../../services/judgeSignup/judgeSignupApi.js";

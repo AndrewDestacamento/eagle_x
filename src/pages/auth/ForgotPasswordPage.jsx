@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import { supabase } from "../../lib/supabaseClient.js";
 import { fetchPersonByEmail } from "../../services/loginAuth/authApi.js";
 import Button from "../../components/ui/Button.jsx";

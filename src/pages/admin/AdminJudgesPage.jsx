@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Card, CardBody, CardTitle } from "../../components/ui/Card.jsx";
+import { useNavigate, useParams } from "react-router";
 import Button from "../../components/ui/Button.jsx";
 import { fetchAdminJudgesByEvent } from "../../services/admin/adminEventViewService.js";
 

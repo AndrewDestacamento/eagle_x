@@ -4,7 +4,7 @@ export default function EventInstanceCard({ event, onClick, action }) {
             onClick={onClick}
             className="cursor-pointer bg-[#FFFFFF] border border-[#00794C] rounded-2xl shadow-md hover:shadow-xl transition flex flex-col justify-between p-10 min-h-[260px]"
         >
-            <div className="flex flex-col gap-3 flex-grow">
+            <div className="flex flex-col gap-3 grow">
                 
                 {/* Title */}
                 <h2 className="text-2xl md:text-3xl font-bold text-[#004785] leading-tight">

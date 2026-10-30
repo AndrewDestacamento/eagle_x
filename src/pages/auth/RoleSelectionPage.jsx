@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import Button from "../../components/ui/Button.jsx";
 import { setAuthIntent } from "../../services/loginAuth/authIntent.js";
 import FGCUlogo from "../../assets/FGCU logo.jpg";

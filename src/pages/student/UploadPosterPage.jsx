@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router";
 import { uploadPoster } from "../../services/studentProjects/studentApi";
 import Button from "../../components/ui/Button.jsx";
 

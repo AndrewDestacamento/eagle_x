@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router";
 import { getStudentProjectInfo } from "../../services/studentProjects/studentService.js";
 import PosterViewer from "../../components/poster/PosterViewer.jsx";
 import Button from "../../components/ui/Button.jsx";
