@@ -17,6 +17,7 @@ export default function TrackSelectPage() {
                 const data = await fetchTracksForEvent(eventInstanceId);
                 setTracks(data);
             } catch (err) {
+                console.error(err);
                 setError("Could not load tracks.");
             } finally {
                 setLoading(false);

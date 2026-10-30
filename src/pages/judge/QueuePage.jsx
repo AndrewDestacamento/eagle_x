@@ -39,7 +39,7 @@ export default function QueuePage() {
 
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(true);
-    const [judgePersonId, setJudgePersonId] = useState("");
+    const [/*judgePersonId,*/ setJudgePersonId] = useState("");
     const hasInitializedFiltersRef = useRef(false);
     const isFetchingRef = useRef(false);
     const deferredSearchTerm = useDeferredValue(searchTerm);
@@ -151,8 +151,7 @@ export default function QueuePage() {
     }, [
         allSubmissions,
         selectedFiltersByFacetId,
-        deferredSearchTerm,
-        judgePersonId,
+        deferredSearchTerm /*, judgePersonId,*/,
     ]);
 
     useEffect(() => {
@@ -238,7 +237,7 @@ export default function QueuePage() {
         return () => {
             window.clearInterval(refreshId);
         };
-    }, [trackId]);
+    }, [setJudgePersonId, trackId]);
 
     function persistFilters(filters) {
         sessionStorage.setItem(

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { /*useEffect,*/ useState } from "react";
 import { useNavigate } from "react-router";
 import Button from "../../components/ui/Button.jsx";
 import EventInstanceCard from "../../components/ui/EventInstanceCard.jsx";
@@ -14,8 +14,7 @@ export default function AdminPage() {
     const [deletingEventId, setDeletingEventId] = useState(null);
 
     async function loadEvents() {
-        setEventsError("");
-
+        //setEventsError("");
         try {
             const data = await fetchEventInstances();
             setEvents(data);
@@ -25,9 +24,9 @@ export default function AdminPage() {
         }
     }
 
-    useEffect(() => {
-        loadEvents();
-    }, []);
+    //useEffect(() => {
+    loadEvents();
+    //}, []);
 
     async function handleDeleteEvent(event, eventInstanceId) {
         event.stopPropagation();
@@ -40,6 +39,7 @@ export default function AdminPage() {
 
         try {
             await deleteEventInstance(eventInstanceId);
+            setEventsError("");
             await loadEvents();
         } catch (error) {
             console.error(error);

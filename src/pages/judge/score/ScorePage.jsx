@@ -123,7 +123,7 @@ export default function ScorePage() {
             if (redirectTimerRef.current)
                 window.clearTimeout(redirectTimerRef.current);
         };
-    }, [submissionId]);
+    }, [navigate, submissionId]);
 
     useEffect(() => {
         if (!judgeId || !trackId || !submissionId) return;

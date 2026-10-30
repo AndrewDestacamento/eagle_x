@@ -14,7 +14,7 @@ import {
     saveFacetSelections,
 } from "./judgeSignupRegistrationService.js";
 import { fetchPersonEventRoleWithFacets } from "./judgeSignupApi.js";
-import { toSelectedOptionIdArray } from "./judgeSignupUtils.js";
+//import { toSelectedOptionIdArray } from "./judgeSignupUtils.js";
 
 export async function fetchJudgeSignupConfig() {
     const eventRoleId = await resolveJudgeEventRoleId();

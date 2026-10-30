@@ -82,7 +82,7 @@ export default function JudgeProfilePage() {
         }
 
         loadEvents();
-    }, [personId]);
+    }, [personId, selectedEventId]);
 
     // Reload profile whenever the selected event changes
     useEffect(() => {

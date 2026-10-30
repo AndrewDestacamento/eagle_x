@@ -35,7 +35,8 @@ export default function CreateEventPage() {
     }, []);
 
     async function handleCreateTrackType(code, name, description) {
-        const newTrackType = await createTrackType(code, name, description);
+        /*const newTrackType = */
+        await createTrackType(code, name, description);
 
         // Reload track types to get the ID of the newly created track type
         const updatedTrackTypes = await fetchTrackTypes();

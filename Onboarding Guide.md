@@ -43,8 +43,17 @@ VITE_DEBUG_LOGS=false # set to `true` for debug logs
 ```
 
 6. Modify `.env` to contain the Supabase credentials for your chosen database (production or testing). Never commit these credentials; treat your URL and key like a username and password without two-factor authentication.
-7. Run the local server.
+
+7. Optionally, run dev scripts defined in `package.json`.
 
 ```bash
-npm run dev -- --host
+npm run format
+npm run lint
+```
+
+8. Run the local server.
+
+```bash
+npm run build
+npm run dev
 ```

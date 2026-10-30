@@ -18,8 +18,15 @@ export default [
         rules: {
             // React is a global variable, for now
             "react/react-in-jsx-scope": "off",
-            // Types are loaded later, I think?
+            // Some data fields/props are loaded later?
             "react/prop-types": "off",
         },
+    },
+    {
+        ignores: [
+            // Vite builds and minifies all Javascript into a single .js file,
+            // spawning too many errors.
+            "dist/",
+        ],
     },
 ];

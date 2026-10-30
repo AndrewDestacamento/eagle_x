@@ -179,8 +179,8 @@ export default function AdminProjectsPage() {
         }
 
         loadProjects();
-        setSelectedFiltersByFacetId({});
-        setShowAllUnscored(false);
+        //setSelectedFiltersByFacetId({});
+        //setShowAllUnscored(false);
     }, [eventInstanceId, trackId]);
 
     function getTableInput(submissionId, project) {

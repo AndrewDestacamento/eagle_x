@@ -55,6 +55,7 @@ export default function TrackRubricForm({
     // Guard: prevent saving if submitted scores already exist for this track.
     const [hasExistingScores, setHasExistingScores] = useState(false);
 
+    /*
     // Keep local form state synchronized whenever the source rubric changes
     // (for example when switching between different rubrics in edit mode).
     useEffect(() => {
@@ -67,6 +68,7 @@ export default function TrackRubricForm({
         setError("");
         setMessage("");
     }, [initialState]);
+    */
 
     // In edit mode, check whether submitted scores exist so we can lock the form.
     useEffect(() => {

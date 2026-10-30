@@ -103,7 +103,7 @@ export default function CreateJudgeForm({ eventInstanceId, onJudgeCreated }) {
 
             if (!rowEmail || !rowDisplayName) {
                 failures.push(
-                    `Row ${index + 1}: expected \"email,display name\".`,
+                    `Row ${index + 1}: expected "email,display name".`,
                 );
                 continue;
             }

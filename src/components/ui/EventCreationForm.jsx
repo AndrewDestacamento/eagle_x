@@ -145,7 +145,7 @@ export default function EventCreationForm({
     async function handleSubmit(event) {
         event.preventDefault();
 
-        const hasTracks = formData.selectedTrackTypeIds.length > 0;
+        //const hasTracks = formData.selectedTrackTypeIds.length > 0;
 
         const eventStartAt = new Date(formData.startAt);
         const eventEndAt = new Date(formData.endAt);
@@ -371,8 +371,8 @@ export default function EventCreationForm({
                     ))}
                 </div>
                 <p className="mt-3 text-xs text-gray-500">
-                    Leave blank if you don't want to include any tracks with
-                    this event.
+                    Leave blank if you don&apos;t want to include any tracks
+                    with this event.
                 </p>
             </div>
 

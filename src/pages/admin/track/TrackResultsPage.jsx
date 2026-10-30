@@ -93,16 +93,24 @@ export default function TrackResultsPage() {
         }
     }, [trackId]);
 
-    const allRankings = rankingsByPhase.all ?? {
-        overallRankings: [],
-        categoryRankingsByCategory: {},
-        categories: [],
-    };
-    const phaseRankings = rankingsByPhase[selectedPhase] ?? {
-        overallRankings: [],
-        categoryRankingsByCategory: {},
-        categories: [],
-    };
+    const allRankings = useMemo(
+        () =>
+            rankingsByPhase.all ?? {
+                overallRankings: [],
+                categoryRankingsByCategory: {},
+                categories: [],
+            },
+        [rankingsByPhase],
+    );
+    const phaseRankings = useMemo(
+        () =>
+            rankingsByPhase[selectedPhase] ?? {
+                overallRankings: [],
+                categoryRankingsByCategory: {},
+                categories: [],
+            },
+        [rankingsByPhase, selectedPhase],
+    );
 
     function setFacetFilter(facetId, token) {
         setSelectedFiltersByFacetId((prev) => ({

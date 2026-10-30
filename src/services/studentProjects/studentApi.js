@@ -437,12 +437,12 @@ export async function saveStudentSubmissionCompletion({
     }
 }
 
-export async function uploadPoster(submissionId, file, personId) {
+export async function uploadPoster(submissionId, file /*, personId*/) {
     // 1️⃣ Define file path in bucket
     const filePath = `posters/${submissionId}/${file.name}`;
 
     // 2️⃣ Upload to Supabase Storage
-    const { data: storageData, error: uploadError } = await supabase.storage
+    const { /*data: storageData,*/ error: uploadError } = await supabase.storage
         .from("submission-files")
         .upload(filePath, file, { upsert: true });
 
