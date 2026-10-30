@@ -88,20 +88,4 @@ supabase/
 
 ## Running locally
 
-```bash
-npm install
-npm run dev
-```
-
-Create a `.env` file at the project root:
-
-```
-VITE_SUPABASE_URL=https://your-project.supabase.co
-VITE_SUPABASE_ANON_KEY=your-anon-key
-```
-
-To enable verbose debug logging in development:
-
-```
-VITE_DEBUG_LOGS=true
-```
+See [`Onboarding Guide.md`](./Onboarding%20Guide.md).
