@@ -437,13 +437,13 @@ export async function saveStudentSubmissionCompletion({
     }
 }
 
-export async function uploadPoster(submissionId, file, personId) {
+export async function uploadPoster(submissionId, file /*, personId*/) {
     // Sanitize filename: strip accents and replace any character that isn't
     // alphanumeric / dot / dash / underscore with "_" to avoid Supabase
     // Storage "invalid key" errors (spaces, accented chars, etc. can trigger this).
     const sanitizedName = file.name
         .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")   // strip combining accent marks
+        .replace(/[\u0300-\u036f]/g, "") // strip combining accent marks
         .replace(/[^a-zA-Z0-9._-]/g, "_"); // replace everything else with _
 
     const filePath = `posters/${submissionId}/${sanitizedName}`;
