@@ -54,12 +54,14 @@ export default function CreateEventPage() {
         try {
             const result = await createEventHierarchyFromForm(formData);
             setCreateMessage(
-                `Created event instance ${result.eventInstanceId} with ${result.tracksCreated} tracks.`
+                `Created event instance ${result.eventInstanceId} with ${result.tracksCreated} tracks.`,
             );
             return true;
         } catch (createError) {
             console.error(createError);
-            setError("Could not create event. Check Supabase permissions and try again.");
+            setError(
+                "Could not create event. Check Supabase permissions and try again.",
+            );
             return false;
         } finally {
             setIsCreatingEvent(false);
@@ -69,12 +71,18 @@ export default function CreateEventPage() {
     return (
         <div className="max-w-3xl mx-auto p-6">
             <div className="mb-6">
-                <Button variant="outline" onClick={() => navigate("/admin")}>← Back to Admin</Button>
+                <Button variant="outline" onClick={() => navigate("/admin")}>
+                    ← Back to Admin
+                </Button>
             </div>
 
             <div className="mb-6">
-                <h1 className="text-3xl font-bold text-[#004785]">Create Event</h1>
-                <p className="text-[#55616D] mt-1 text-sm">Fill out the form below to create a new event.</p>
+                <h1 className="text-3xl font-bold text-[#004785]">
+                    Create Event
+                </h1>
+                <p className="text-[#55616D] mt-1 text-sm">
+                    Fill out the form below to create a new event.
+                </p>
             </div>
 
             <div className="rounded-2xl border border-gray-200 bg-white shadow-md p-6">
@@ -85,7 +93,11 @@ export default function CreateEventPage() {
                     onCreateTrackType={handleCreateTrackType}
                 />
 
-                {createMessage && <p className="mt-4 text-sm text-[#00794C] font-medium">{createMessage}</p>}
+                {createMessage && (
+                    <p className="mt-4 text-sm text-[#00794C] font-medium">
+                        {createMessage}
+                    </p>
+                )}
                 {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
             </div>
         </div>

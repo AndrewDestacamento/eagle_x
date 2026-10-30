@@ -3,15 +3,23 @@ import pluginJs from "@eslint/js";
 import pluginReact from "eslint-plugin-react";
 import pluginReactHooks from "eslint-plugin-react-hooks";
 import pluginReactRefresh from "eslint-plugin-react-refresh";
-
+import pluginPrettier from "eslint-config-prettier";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  {files: ["**/*.{js,mjs,cjs,jsx}"]},
-  {languageOptions: { globals: {...globals.browser, ...globals.node} }},
-  pluginJs.configs.recommended,
-  pluginReact.configs.flat.recommended,
-  pluginReactHooks.configs.flat.recommended,
-  pluginReactRefresh.configs.vite,
-  {rules: { "react/react-in-jsx-scope": "off", "react/prop-types": "off"}},
+    { files: ["**/*.{js,mjs,cjs,jsx}"] },
+    { languageOptions: { globals: { ...globals.browser, ...globals.node } } },
+    pluginJs.configs.recommended,
+    pluginReact.configs.flat.recommended,
+    pluginReactHooks.configs.flat.recommended,
+    pluginReactRefresh.configs.vite,
+    pluginPrettier,
+    {
+        rules: {
+            // React is a global variable, for now
+            "react/react-in-jsx-scope": "off",
+            // Types are loaded later, I think?
+            "react/prop-types": "off",
+        },
+    },
 ];
