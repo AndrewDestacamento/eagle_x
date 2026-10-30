@@ -85,7 +85,7 @@ async function applySubmissionStatusChanges(instances) {
         trackIds: updateGroups.pre_scored,
         fromStatus: "pre_scoring",
         toStatus: "pre_scored",
-        minScores: 3,
+        minScores: 10,
     });
 
     // Event-scoring windows open direct progression into event_scoring.
@@ -105,7 +105,7 @@ async function applySubmissionStatusChanges(instances) {
         trackIds: updateGroups.done,
         fromStatus: "event_scoring",
         toStatus: "done",
-        minScores: 3,
+        minScores: 10,
     });
 }
 
