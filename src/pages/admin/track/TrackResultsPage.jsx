@@ -46,6 +46,7 @@ export default function TrackResultsPage() {
     const [submissions, setSubmissions] = useState([]);
     const [rankingsByPhase, setRankingsByPhase] = useState({});
     const [selectedPhase, setSelectedPhase] = useState("pre_scoring");
+    const [scoringMode, setScoringMode] = useState("average"); // "average" | "total"
     const [selectedCategory, setSelectedCategory] = useState("");
     const [filterFacets, setFilterFacets] = useState([]);
     const [selectedFiltersByFacetId, setSelectedFiltersByFacetId] = useState(
@@ -131,29 +132,39 @@ export default function TrackResultsPage() {
         return new Set(filtered.map((submission) => submission.submissionId));
     }, [submissions, selectedFiltersByFacetId]);
 
-    const filteredOverallRankings = useMemo(
-        () =>
-            allRankings.overallRankings.filter((row) =>
-                filteredSubmissionIdSet.has(row.submissionId),
-            ),
-        [allRankings, filteredSubmissionIdSet],
-    );
+    const isTotal = scoringMode === "total";
+    const scoreLabel = isTotal ? "Total Score" : "Avg Score";
+    const overallValue = (row) => (isTotal ? row.sumScore : row.totalScore);
 
-    const filteredCategoryRankings = useMemo(() => {
-        const selectedRows =
-            allRankings.categoryRankingsByCategory[selectedCategory] ?? [];
-        return selectedRows.filter((row) =>
+    const filteredOverallRankings = useMemo(() => {
+        const rows =
+            (isTotal
+                ? allRankings.totalOverallRankings
+                : allRankings.overallRankings) ?? [];
+        return rows.filter((row) =>
             filteredSubmissionIdSet.has(row.submissionId),
         );
-    }, [allRankings, filteredSubmissionIdSet, selectedCategory]);
+    }, [allRankings, filteredSubmissionIdSet, isTotal]);
 
-    const filteredPhaseRankings = useMemo(
-        () =>
-            phaseRankings.overallRankings.filter((row) =>
-                filteredSubmissionIdSet.has(row.submissionId),
-            ),
-        [phaseRankings, filteredSubmissionIdSet],
-    );
+    const filteredCategoryRankings = useMemo(() => {
+        const byCategory =
+            (isTotal
+                ? allRankings.totalCategoryRankingsByCategory
+                : allRankings.categoryRankingsByCategory) ?? {};
+        return (byCategory[selectedCategory] ?? []).filter((row) =>
+            filteredSubmissionIdSet.has(row.submissionId),
+        );
+    }, [allRankings, filteredSubmissionIdSet, selectedCategory, isTotal]);
+
+    const filteredPhaseRankings = useMemo(() => {
+        const rows =
+            (isTotal
+                ? phaseRankings.totalOverallRankings
+                : phaseRankings.overallRankings) ?? [];
+        return rows.filter((row) =>
+            filteredSubmissionIdSet.has(row.submissionId),
+        );
+    }, [phaseRankings, filteredSubmissionIdSet, isTotal]);
 
     return (
         <div className="max-w-6xl mx-auto p-6">
@@ -201,6 +212,20 @@ export default function TrackResultsPage() {
                 <div className="space-y-6">
                     {/* Filters */}
                     <section className="rounded-2xl border border-gray-200 bg-white shadow-md p-5">
+                        <label className="mb-4 block text-sm font-semibold text-[#004785]">
+                            Rank By
+                            <select
+                                className="mt-1 w-full rounded-lg border border-gray-300 p-2 text-sm font-normal text-[#55616D] focus:outline-none focus:ring-2 focus:ring-[#00794C]/50 md:w-64"
+                                value={scoringMode}
+                                onChange={(event) =>
+                                    setScoringMode(event.target.value)
+                                }
+                            >
+                                <option value="average">Average Score</option>
+                                <option value="total">Total Points</option>
+                            </select>
+                        </label>
+
                         <div className="mb-4 flex items-center justify-between gap-3">
                             <p className="font-bold text-[#004785]">
                                 Segmented Filters
@@ -276,14 +301,14 @@ export default function TrackResultsPage() {
                                             "Rank",
                                             "Submission",
                                             "# Evaluations",
-                                            "Overall Score",
+                                            scoreLabel,
                                             "Phase",
                                         ],
                                         filteredOverallRankings.map((row) => [
                                             row.rank ?? "",
                                             row.title,
                                             row.scoreCount,
-                                            formatScore(row.totalScore),
+                                            formatScore(overallValue(row)),
                                             row.status,
                                         ]),
                                     )
@@ -312,7 +337,7 @@ export default function TrackResultsPage() {
                                                 # Evaluations
                                             </th>
                                             <th className="px-3 py-2 font-semibold text-[#004785]">
-                                                Overall Score
+                                                {scoreLabel}
                                             </th>
                                             <th className="px-3 py-2 font-semibold text-[#004785]">
                                                 Phase
@@ -341,7 +366,7 @@ export default function TrackResultsPage() {
                                                 </td>
                                                 <td className="px-3 py-2 text-[#55616D]">
                                                     {formatScore(
-                                                        row.totalScore,
+                                                        overallValue(row),
                                                     )}
                                                 </td>
                                                 <td className="px-3 py-2 text-[#55616D]">
@@ -536,14 +561,16 @@ export default function TrackResultsPage() {
                                                 "Rank",
                                                 "Submission",
                                                 "# Evaluations",
-                                                "Overall Avg",
+                                                isTotal
+                                                    ? "Overall Total"
+                                                    : "Overall Avg",
                                                 "Phase",
                                             ],
                                             filteredPhaseRankings.map((row) => [
                                                 row.rank ?? "",
                                                 row.title,
                                                 row.scoreCount,
-                                                formatScore(row.totalScore),
+                                                formatScore(overallValue(row)),
                                                 row.status,
                                             ]),
                                         )
@@ -567,7 +594,9 @@ export default function TrackResultsPage() {
                                                 "Rank",
                                                 "Submission",
                                                 "# Evaluations",
-                                                "Overall Avg.",
+                                                isTotal
+                                                    ? "Overall Total"
+                                                    : "Overall Avg.",
                                                 "Phase",
                                             ].map((h) => (
                                                 <th
@@ -601,7 +630,7 @@ export default function TrackResultsPage() {
                                                 </td>
                                                 <td className="px-3 py-2 text-[#55616D]">
                                                     {formatScore(
-                                                        row.totalScore,
+                                                        overallValue(row),
                                                     )}
                                                 </td>
                                                 <td className="px-3 py-2 text-[#55616D]">
