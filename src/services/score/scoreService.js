@@ -119,6 +119,7 @@ export async function fetchScoringContext(submissionId, judgePersonId) {
     return {
         submissionId: submission.submission_id,
         submissionTitle: submission.title,
+        submissionDescription: submission.description,
         trackId: submission.track_id,
         rubricId: rubric.rubric_id,
         rubricName: rubric.name,
