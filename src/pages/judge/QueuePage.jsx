@@ -39,7 +39,7 @@ export default function QueuePage() {
 
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] = useState(true);
-    const [/*judgePersonId,*/ setJudgePersonId] = useState("");
+    const [judgePersonId, setJudgePersonId] = useState("");
     const hasInitializedFiltersRef = useRef(false);
     const isFetchingRef = useRef(false);
     const deferredSearchTerm = useDeferredValue(searchTerm);
@@ -151,7 +151,8 @@ export default function QueuePage() {
     }, [
         allSubmissions,
         selectedFiltersByFacetId,
-        deferredSearchTerm /*, judgePersonId,*/,
+        deferredSearchTerm,
+        /*judgePersonId,*/
     ]);
 
     useEffect(() => {
@@ -174,12 +175,13 @@ export default function QueuePage() {
             try {
                 // const judgeSession = supabase.auth.getSession();
                 // alert(`Loaded judge session: ${JSON.stringify(judgeSession)}`);
-                const judgePersonId = sessionStorage.getItem("auth_person_id");
+                const judgePersonIdRequest =
+                    sessionStorage.getItem("auth_person_id");
                 const eventInstanceId = sessionStorage.getItem(
                     "judge_event_instance_id",
                 );
 
-                if (!judgePersonId || !eventInstanceId) {
+                if (!judgePersonIdRequest || !eventInstanceId) {
                     setError(
                         "No active judge profile found. Please sign up first.",
                     );
@@ -187,7 +189,7 @@ export default function QueuePage() {
                     return;
                 }
 
-                setJudgePersonId(judgePersonId);
+                setJudgePersonId(judgePersonIdRequest);
                 sessionStorage.setItem("judge_track_id", trackId);
 
                 const queueData = await fetchQueueSubmissionsForJudge({
@@ -237,7 +239,7 @@ export default function QueuePage() {
         return () => {
             window.clearInterval(refreshId);
         };
-    }, [setJudgePersonId, trackId]);
+    }, [judgePersonId, trackId]);
 
     function persistFilters(filters) {
         sessionStorage.setItem(
