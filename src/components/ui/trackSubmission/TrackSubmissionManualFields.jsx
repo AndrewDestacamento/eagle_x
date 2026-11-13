@@ -1,4 +1,5 @@
 import Button from "../Button.jsx";
+import DateTimeField from "../DateTimeField.jsx";
 import TrackFacetFields from "../TrackFacetFields.jsx";
 
 export default function TrackSubmissionManualFields({
@@ -75,8 +76,8 @@ export default function TrackSubmissionManualFields({
                     onFieldChange("supervisor_email", event.target.value)
                 }
             />
-            <input
-                type="datetime-local"
+            <DateTimeField
+                name="submitted_at"
                 className="rounded border p-2 text-sm"
                 value={formData.submitted_at}
                 onChange={(event) =>
