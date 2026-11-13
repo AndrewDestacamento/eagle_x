@@ -120,6 +120,7 @@ function renderCriterionInput(criterion, response, onValueChange) {
 
 export default function ScorePageView({
     submissionTitle,
+    submissionDescription,
     rubricName,
     tableNumber,
     tableSession,
@@ -146,6 +147,9 @@ export default function ScorePageView({
                     </h1>
                     <p className="text-[#55616D] mt-1 text-lg font-medium">
                         {submissionTitle}
+                    </p>
+                    <p className="text-[#55616D] mt-1 text-lg font-medium">
+                        {submissionDescription}
                     </p>
                     <div className="mt-2 flex flex-wrap gap-4 text-sm">
                         <span className="text-[#55616D]">

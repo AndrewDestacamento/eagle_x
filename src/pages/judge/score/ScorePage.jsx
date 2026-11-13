@@ -14,13 +14,16 @@ import ScorePageView from "./ScorePageView.jsx";
 
 export default function ScorePage() {
     const { projectId: submissionId } = useParams();
-    const [submissionTitle, setSubmissionTitle] = useState("Submission");
+    const [submissionTitle, setSubmissionTitle] = useState("(title loading)");
+    const [submissionDescription, setSubmissionDescription] = useState(
+        "(description loading)",
+    );
     const [trackId, setTrackId] = useState(null);
     const [rubricId, setRubricId] = useState(null);
     const [tableNumber, setTableNumber] = useState(null);
     const [tableSession, setTableSession] = useState(null);
     const [posterFileUrl, setPosterFileUrl] = useState(null);
-    const [rubricName, setRubricName] = useState("Rubric");
+    const [rubricName, setRubricName] = useState("(rubric loading)");
     const [criteria, setCriteria] = useState([]);
     const [responsesByCriterionId, setResponsesByCriterionId] = useState({});
     const [overallComment, setOverallComment] = useState("");
@@ -82,7 +85,10 @@ export default function ScorePage() {
                     return;
                 }
 
-                setSubmissionTitle(context.submissionTitle || "Submission");
+                setSubmissionTitle(context.submissionTitle || "(no title)");
+                setSubmissionDescription(
+                    context.submissionDescription || "(no description)",
+                );
                 setTrackId(context.trackId);
                 setRubricId(context.rubricId);
                 setRubricName(context.rubricName || "Rubric");
@@ -238,6 +244,7 @@ export default function ScorePage() {
     return (
         <ScorePageView
             submissionTitle={submissionTitle}
+            submissionDescription={submissionDescription}
             rubricName={rubricName}
             tableNumber={tableNumber}
             tableSession={tableSession}

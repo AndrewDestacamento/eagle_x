@@ -9,7 +9,9 @@ import { supabase } from "../../lib/supabaseClient.js";
 export async function fetchSubmissionForScoring(submissionId) {
     const { data, error } = await supabase
         .from("submission")
-        .select("submission_id, title, track_id, supervisor_person_id, status")
+        .select(
+            "submission_id, title, description, track_id, supervisor_person_id, status",
+        )
         .eq("submission_id", submissionId)
         .maybeSingle();
 
