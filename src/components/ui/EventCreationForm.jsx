@@ -1,14 +1,7 @@
 import { useState } from "react";
 import Button from "./Button.jsx";
-
-function formatDateTimeLocal(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
-}
+import DateTimeField from "./DateTimeField.jsx";
+import { formatDateTimeLocal } from "../../services/eventInstance/eventInstanceUtils.js";
 
 export default function EventCreationForm({
     trackTypes,
@@ -16,7 +9,11 @@ export default function EventCreationForm({
     onSubmit,
     onCreateTrackType,
 }) {
-    const now = new Date();
+    // "Right now" defaults snap to the nearest 5 minutes; +30/+90 days derive from it.
+    const fiveMinutes = 5 * 60 * 1000;
+    const now = new Date(
+        Math.round(new Date().getTime() / fiveMinutes) * fiveMinutes,
+    );
     const plus30 = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
     const plus90 = new Date(now.getTime() + 90 * 24 * 60 * 60 * 1000);
 
@@ -238,8 +235,7 @@ export default function EventCreationForm({
             />
 
             <label className="text-sm text-gray-700">Start at</label>
-            <input
-                type="datetime-local"
+            <DateTimeField
                 name="startAt"
                 value={formData.startAt}
                 onChange={handleFieldChange}
@@ -248,8 +244,7 @@ export default function EventCreationForm({
             />
 
             <label className="text-sm text-gray-700">End at</label>
-            <input
-                type="datetime-local"
+            <DateTimeField
                 name="endAt"
                 value={formData.endAt}
                 onChange={handleFieldChange}
@@ -278,8 +273,7 @@ export default function EventCreationForm({
                             <label className="text-sm text-gray-700">
                                 Pre-scoring starts
                             </label>
-                            <input
-                                type="datetime-local"
+                            <DateTimeField
                                 name="preScoringStartAt"
                                 value={formData.preScoringStartAt}
                                 onChange={handleFieldChange}
@@ -290,8 +284,7 @@ export default function EventCreationForm({
                             <label className="text-sm text-gray-700">
                                 Pre-scoring ends
                             </label>
-                            <input
-                                type="datetime-local"
+                            <DateTimeField
                                 name="preScoringEndAt"
                                 value={formData.preScoringEndAt}
                                 onChange={handleFieldChange}
@@ -327,8 +320,7 @@ export default function EventCreationForm({
             />
 
             <label className="text-sm text-gray-700">Submission opens</label>
-            <input
-                type="datetime-local"
+            <DateTimeField
                 name="submissionOpenAt"
                 value={formData.submissionOpenAt}
                 onChange={handleFieldChange}
@@ -337,8 +329,7 @@ export default function EventCreationForm({
             />
 
             <label className="text-sm text-gray-700">Submission closes</label>
-            <input
-                type="datetime-local"
+            <DateTimeField
                 name="submissionCloseAt"
                 value={formData.submissionCloseAt}
                 onChange={handleFieldChange}

@@ -3,20 +3,16 @@ import { useNavigate, useParams } from "react-router";
 
 import Button from "../../components/ui/Button.jsx";
 import CreateJudgeForm from "../../components/ui/CreateJudgeForm.jsx";
+import DateTimeField from "../../components/ui/DateTimeField.jsx";
 import {
     fetchEventInstanceDetails,
     updateEventInstanceSchedule,
 } from "../../services/eventAdminService.js";
+import { formatDateTimeLocal } from "../../services/eventInstance/eventInstanceUtils.js";
 
 function toDateTimeLocalInput(value) {
     if (!value) return "";
-    const date = new Date(value);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
+    return formatDateTimeLocal(new Date(value));
 }
 
 export default function EventDetailsPage() {
@@ -275,14 +271,24 @@ export default function EventDetailsPage() {
                                         <label className="block text-xs font-semibold text-[#55616D] mb-1">
                                             {label}
                                         </label>
-                                        <input
-                                            type={type}
-                                            name={name}
-                                            value={editForm[name]}
-                                            onChange={handleEditFieldChange}
-                                            className="w-full rounded-lg border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#00794C]/50"
-                                            required={required}
-                                        />
+                                        {type === "datetime-local" ? (
+                                            <DateTimeField
+                                                name={name}
+                                                value={editForm[name]}
+                                                onChange={handleEditFieldChange}
+                                                className="w-full rounded-lg border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#00794C]/50"
+                                                required={required}
+                                            />
+                                        ) : (
+                                            <input
+                                                type={type}
+                                                name={name}
+                                                value={editForm[name]}
+                                                onChange={handleEditFieldChange}
+                                                className="w-full rounded-lg border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#00794C]/50"
+                                                required={required}
+                                            />
+                                        )}
                                     </div>
                                 ))}
 
@@ -307,8 +313,7 @@ export default function EventDetailsPage() {
                                             <label className="block text-xs font-semibold text-[#55616D] mb-1">
                                                 Pre-scoring starts
                                             </label>
-                                            <input
-                                                type="datetime-local"
+                                            <DateTimeField
                                                 name="preScoringStartAt"
                                                 value={
                                                     editForm.preScoringStartAt
@@ -322,8 +327,7 @@ export default function EventDetailsPage() {
                                             <label className="block text-xs font-semibold text-[#55616D] mb-1">
                                                 Pre-scoring ends
                                             </label>
-                                            <input
-                                                type="datetime-local"
+                                            <DateTimeField
                                                 name="preScoringEndAt"
                                                 value={editForm.preScoringEndAt}
                                                 onChange={handleEditFieldChange}
